@@ -1,21 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
 
+/* 
+  Ajout d'une image de fond avec overlay sombre via :before sur le body 
+  pour éviter de toucher à la structure HTML existante.
+*/
 body {
   margin: 0;
   font-family: 'Cormorant Garamond', serif;
   background-color: #F8F9FA;
   color: #333;
+  /* Ajout de position relative pour le ::before */
+  position: relative;
+  min-height: 100vh;
+  /* Pour que le texte soit au-dessus du background, on gère l'empilement avec z-index sur ::before */
 }
 
+/* Overlay & background-image sur le body via pseudo-élément */
+body::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  z-index: -1;
+  /* Met l'image de fond : remplacez 'image1' par le chemin réel de l'image */
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.55)), /* overlay sombre */
+    url('image1') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 1; /* On peut jouer sur l'opacité ici si besoin */
+  pointer-events: none; /* Pour que l'overlay ne bloque pas les interactions */
+}
+
+/* Container principal pour donner un fond légèrement opaque au contenu */
 .container {
   max-width: 900px;
   margin: auto;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: rgba(255,255,255,0.86); /* Ajout d'opacité au fond */
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Titre principal : on renforce la lisibilité avec une ombre et un fond légèrement opaque */
 h1 {
   text-align: center;
   font-size: 23px;
@@ -23,15 +48,17 @@ h1 {
   margin-bottom: 30px;
   font-weight: 1000;
   font-family: cursive;
-  background-color: #ffffff70;
-  justify-self: anchor-center;
+  background-color: #ffffffb0; /* Blanc avec opacité */
   border-radius: 9px;
   padding: 10px;
   text-decoration: overline;
   text-decoration-color: #dc9611;
   border: solid;
+  /* Ajoute une ombre pour le contraste sur l'image */
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+/* Input recherche : couleur de fond légèrement opaque pour bien voir le texte */
 #searchInput {
   width: 100%;
   padding: 12px 15px;
@@ -40,16 +67,18 @@ h1 {
   border-radius: 10px;
   margin-bottom: 25px;
   box-sizing: border-box;
-  background-color: #fffef8;
+  background-color: rgba(255,254,248,0.92); /* Plus opaque pour lisibilité */
 }
 
+/* Cartes chansons lisibles sur le background */
 .chanson {
-  background-color: #fffef8;
+  background-color: rgba(255,254,248,0.92); /* Légère opacité */
   border-left: 5px solid #FFD700;
   padding: 15px 20px;
   border-radius: 10px;
   margin-bottom: 20px;
   transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
 }
 
 .chanson:hover {
@@ -71,13 +100,29 @@ h1 {
   color: #555;
 }
 
-
 .tonalite {
     font-size: xx-large;
     text-shadow: 0 0 1px #040000;
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 6px;
+}
+
+/* 
+  Responsive : pensez à vérifier que tout reste lisible sur petits écrans.
+*/
+@media (max-width: 700px) {
+  .container {
+    padding: 8px;
   }
+  h1 {
+    font-size: 18px;
+    padding: 7px;
+  }
+}
 
-
+/*
+  Astuce :
+  - Pour adapter la lisibilité, augmentez la valeur alpha des rgba() ou du linear-gradient dans body::before.
+  - Pour utiliser l'image locale, remplacez 'image1' par le vrai chemin (ex: './logo.png').
+*/
