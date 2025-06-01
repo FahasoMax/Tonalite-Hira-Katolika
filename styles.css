@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  background-color: #F8F9FA;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  font-size: 23px;
+  color: #910404;
+  margin-bottom: 30px;
+  font-weight: 1000;
+  font-family: cursive;
+  background-color: #ffffff70;
+  justify-self: anchor-center;
+  border-radius: 9px;
+  padding: 10px;
+  text-decoration: overline;
+  text-decoration-color: #dc9611;
+  border: solid;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  box-sizing: border-box;
+  background-color: #fffef8;
+}
+
+.chanson {
+  background-color: #fffef8;
+  border-left: 5px solid #FFD700;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease;
+}
+
+.chanson:hover {
+  transform: translateY(-3px);
+}
+
+.chanson h2 {
+  margin: 0 0 10px;
+  color: #B22222;
+  font-size: 22px;
+}
+
+.chanson p {
+  margin: 4px 0;
+  color: #444;
+}
+
+.chanson p strong {
+  color: #555;
+}
+
+
+.tonalite {
+    font-size: xx-large;
+    text-shadow: 0 0 1px #040000;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+
