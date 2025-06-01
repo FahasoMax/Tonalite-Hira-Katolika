@@ -27,7 +27,7 @@ body::before {
   max-width: 900px;
   margin: auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgb(255 255 255 / 18%);
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
