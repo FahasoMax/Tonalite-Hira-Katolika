@@ -13,7 +13,7 @@ const jsonFiles = [
 
 let chansonsData = [];
 
-// Fonction pour charger et fusionner tous les fichiers JSON
+// Fonction pour charger tous les fichiers JSON et les fusionner
 async function loadAllJson(files, prefix = '') {
   const promises = files.map(file =>
     fetch(prefix + file)
@@ -23,13 +23,14 @@ async function loadAllJson(files, prefix = '') {
       })
       .catch(err => {
         console.error(err);
-        return []; // Si erreur, on retourne un tableau vide
+        return []; // Retourne un tableau vide si erreur
       })
   );
   const results = await Promise.all(promises);
-  return results.flat(); // Fusionner tous les tableaux
+  return results.flat(); // Fusionne tous les tableaux en un seul
 }
 
+// Fonction d'affichage
 function afficherChansons(chansons) {
   const container = document.getElementById("liste-chansons");
   container.innerHTML = "";
@@ -37,23 +38,24 @@ function afficherChansons(chansons) {
   chansons.forEach(chanson => {
     const { title, page, Ambony = "", Antonony = "", Ambany = "" } = chanson;
 
-    // Affichage conditionnel des tonalités
-    let tonaliteHtml = "";
-    if (Ambony) tonaliteHtml += `<p><strong>Ambony :</strong> <span class="tonalite">${Ambony}</span></p>`;
-    if (Antonony) tonaliteHtml += `<p><strong>Antonony :</strong> <span class="tonalite">${Antonony}</span></p>`;
-    if (Ambany) tonaliteHtml += `<p><strong>Ambany :</strong> <span class="tonalite">${Ambany}</span></p>`;
-
+    // Format du bloc chanson
     const div = document.createElement("div");
     div.className = "chanson";
-    div.innerHTML = `
-      <h2>✝ ${title}</h2>
-      <p><strong>Page :</strong> ${page ?? ""}</p>
-      ${tonaliteHtml}
-    `;
+    div.style.marginBottom = "30px"; // pour espacer visuellement
+
+    let html = `<h2>✝ ${title}</h2>`;
+    html += `<p><strong>Page :</strong> ${page ?? ""}</p>`;
+
+    if (Ambony) html += `<p><strong>Ambony :</strong> ${Ambony}</p>`;
+    if (Antonony) html += `<p><strong>Antonony :</strong> ${Antonony}</p>`;
+    if (Ambany) html += `<p><strong>Ambany :</strong> ${Ambany}</p>`;
+
+    div.innerHTML = html;
     container.appendChild(div);
   });
 }
 
+// Fonction pour mélanger aléatoirement
 function melangerArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }
@@ -67,7 +69,7 @@ loadAllJson(jsonFiles)
   })
   .catch(error => console.error("Erreur chargement JSON :", error));
 
-// Recherche en direct
+// Recherche live
 document.getElementById("searchInput").addEventListener("input", e => {
   const valeur = e.target.value.toLowerCase();
   const resultats = chansonsData.filter(chanson =>
@@ -75,6 +77,7 @@ document.getElementById("searchInput").addEventListener("input", e => {
   );
   afficherChansons(resultats);
 });
+
 
 
 
